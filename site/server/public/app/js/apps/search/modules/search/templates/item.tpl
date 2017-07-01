@@ -1,0 +1,1 @@
+<td class="center">{{= place}}</td><td>{{= name}}</td><td class="center">{{= statements}}</td>

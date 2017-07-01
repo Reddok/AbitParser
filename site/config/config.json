@@ -1,0 +1,42 @@
+{
+  "name": "Abiturient",
+  "port": 3000,
+  "lastUpdated": "Wed Feb 22 2017 10:01:59 GMT+0300 (Московское время (зима))",
+  "yearArchives": [
+    2016
+  ],
+  "activeYear": 2016,
+  "mongo": {
+    "mainDb": "mongodb://localhost/parser",
+    "logsDb": "mongodb://localhost/logs",
+    "options": {
+      "server": {
+        "poolSize": 20,
+        "socketOptions": {
+          "keepAlive": 30000,
+          "connectTimeoutMS": 30000,
+          "auto_reconnect": true
+        },
+        "auto_reconnect": true
+      },
+      "replset": {
+        "socketOptions": {
+          "keepAlive": 300000,
+          "connectTimeoutMS": 30000
+        }
+      }
+    }
+  },
+  "mail": {
+    "user": "vasilyevnikolayy@gmail.com",
+    "password": "vasilyev"
+  },
+  "parser": {
+    "baseUrl": "http://vstup.info/",
+    "interval": 86400000,
+    "siteUpdated": "31/01/17 o 23:39"
+  },
+  "admin": {
+    "mail": "reddok2@gmail.com"
+  }
+}

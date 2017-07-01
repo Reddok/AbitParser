@@ -1,0 +1,130 @@
+/*variables and helpers classes*/
+.breadcrumbNode {
+  padding: 0 20px 0 40px;
+  background: #F3EFB0;
+  max-width: 270px;
+  display: inline-block;
+  border-top: 9px solid #F3EFB0;
+  border-bottom: 9px solid #F3EFB0;
+  height: 66px;
+  vertical-align: middle;
+  overflow: hidden;
+  transition: all 0.6s;
+}
+.breadcrumbNode:before,
+.breadcrumbNode:after {
+  content: "";
+  display: block;
+  height: 74px;
+  width: 21px;
+  position: absolute;
+  transition: all 0.6s;
+  top: -4px;
+}
+.breadcrumbNode:before {
+  background: url(../images/triangle-white.svg);
+  left: 0;
+}
+.breadcrumbNode:after {
+  background: url(../images/triangle.svg);
+  right: -21px;
+  z-index: 10;
+}
+.breadcrumbNode:hover {
+  text-decoration: none;
+}
+.breadcrumbNode > span {
+  display: table-cell;
+  vertical-align: middle;
+  height: 50px;
+}
+/*variables and helpers classes end*/
+.breadcrumb {
+  padding: 5px 10px;
+  border-top: 2px solid #ddd;
+  border-bottom: 2px solid #ddd;
+}
+.breadcrumb > li + li:before {
+  content: "";
+  padding: 0;
+}
+.breadcrumb > li {
+  font-size: 12px;
+  margin-right: 5px;
+  border-top: 4px solid #EAE16C;
+  border-bottom: 4px solid #EAE16C;
+  position: relative;
+  transition: all 0.6s;
+}
+.breadcrumb > li:hover {
+  border-color: #d9d37d;
+}
+.breadcrumb > li:last-child {
+  border-color: #EAE16C;
+}
+.breadcrumb > li > a,
+.breadcrumb > li > span {
+  padding: 0 20px 0 40px;
+  background: #F3EFB0;
+  max-width: 270px;
+  display: inline-block;
+  border-top: 9px solid #F3EFB0;
+  border-bottom: 9px solid #F3EFB0;
+  height: 66px;
+  vertical-align: middle;
+  overflow: hidden;
+  transition: all 0.6s;
+}
+.breadcrumb > li > a:before,
+.breadcrumb > li > span:before,
+.breadcrumb > li > a:after,
+.breadcrumb > li > span:after {
+  content: "";
+  display: block;
+  height: 74px;
+  width: 21px;
+  position: absolute;
+  transition: all 0.6s;
+  top: -4px;
+}
+.breadcrumb > li > a:before,
+.breadcrumb > li > span:before {
+  background: url(../images/triangle-white.svg);
+  left: 0;
+}
+.breadcrumb > li > a:after,
+.breadcrumb > li > span:after {
+  background: url(../images/triangle.svg);
+  right: -21px;
+  z-index: 10;
+}
+.breadcrumb > li > a:hover,
+.breadcrumb > li > span:hover {
+  text-decoration: none;
+}
+.breadcrumb > li > a > span,
+.breadcrumb > li > span > span {
+  display: table-cell;
+  vertical-align: middle;
+  height: 50px;
+}
+.breadcrumb > li > a:hover {
+  color: #000;
+}
+.breadcrumb li:first-child a:before {
+  background: none;
+}
+/*
+> a svg, span svg{
+    fill: @bgc-color;
+    stroke:white;
+    stroke-width:1;
+    transition: @defTrans;
+    position: absolute;
+    right: -20px;
+    top: 0;
+  }
+  > a:hover svg{
+    fill:@border-color;
+  }
+*/

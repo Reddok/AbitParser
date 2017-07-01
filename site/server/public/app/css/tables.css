@@ -1,0 +1,29 @@
+.table.custom-table {
+  background-color: #F2F2F2;
+  border: 1px solid #ddd;
+}
+.table.custom-table th,
+.table.custom-table td {
+  vertical-align: middle;
+}
+.table.custom-table th,
+.table.custom-table td.center {
+  text-align: center;
+}
+.table.custom-table tbody a {
+  display: block;
+  text-decoration: none;
+}
+.table.custom-table tr.table-empty-view {
+  height: 200px;
+}
+.table.custom-table:not(.no-highlight) tbody tr:not(.table-empty-view):hover {
+  cursor: pointer;
+}
+.table.custom-table:not(.no-highlight) tbody tr:not(.table-empty-view):hover td {
+  background: #337ab7;
+  color: #fff;
+}
+.table.custom-table:not(.no-highlight) tbody tr:not(.table-empty-view):hover td a {
+  color: #fff;
+}

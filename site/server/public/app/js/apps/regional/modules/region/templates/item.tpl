@@ -1,0 +1,1 @@
+<td><a href="#specs/{{=_id}}">{{= name}}</a></td><td class="center">{{= children}}</td>

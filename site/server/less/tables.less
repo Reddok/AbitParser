@@ -1,0 +1,38 @@
+@bgc-color: #F2F2F2;
+@hover-bgc: #337ab7;
+@hover-text: #fff;
+@defTrans: all .3s;
+
+.table.custom-table{
+  background-color: @bgc-color;
+  border: 1px solid #ddd;
+
+  th, td{
+    vertical-align: middle;
+  }
+  th, td.center{
+    text-align: center;
+  }
+
+  tbody a{
+        display: block;
+        text-decoration: none;
+  }
+
+
+  tr.table-empty-view{
+    height: 200px;
+  }
+}
+.table.custom-table:not(.no-highlight) tbody{
+  tr:not(.table-empty-view):hover{
+    cursor: pointer;
+    td{
+      background: @hover-bgc;
+      color: @hover-text;
+      a{
+        color: @hover-text;
+      }
+    }
+  }
+}

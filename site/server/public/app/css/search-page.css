@@ -1,0 +1,14 @@
+.form-control-feedback {
+  display: none;
+}
+.has-error .form-control-feedback {
+  display: block;
+}
+.search-results table td:first-child,
+.search-results table th:first-child {
+  width: 50px;
+}
+.search-results table td:last-child,
+.search-results table th:last-child {
+  width: 150px;
+}

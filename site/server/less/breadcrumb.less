@@ -1,0 +1,99 @@
+/*variables and helpers classes*/
+@bgc-color: #F2F2F2;
+@border-color: #EAE16C;
+@bgc-color: #F3EFB0;
+@heightOuter: 74px;
+@borderLi: 4px;
+@heightA: @heightOuter - @borderLi*2;
+@defTrans: all .6s;
+
+.breadcrumbNode{
+  padding: 0 20px 0 40px;
+  background: @bgc-color;
+  max-width: 270px;
+  display: inline-block;
+  border-top: 9px solid @bgc-color;
+  border-bottom: 9px solid @bgc-color;
+  height: @heightA;
+  vertical-align: middle;
+  overflow: hidden;
+  transition: @defTrans;
+  &:before, &:after{
+    content: "";
+    display: block;
+    height: @heightOuter;
+    width: 21px;
+    position: absolute;
+    transition: @defTrans;
+    top: -4px;
+  }
+  &:before{
+    background: url(../images/triangle-white.svg);
+    left: 0;
+  }
+  &:after{
+    background: url(../images/triangle.svg);
+    right: -21px;
+    z-index: 10;
+  }
+  &:hover{
+    text-decoration: none;
+  }
+  > span{
+    display: table-cell;
+    vertical-align: middle;
+    height: 50px;
+  }
+}
+
+/*variables and helpers classes end*/
+
+.breadcrumb{
+  padding: 5px 10px;
+  border-top: 2px solid #ddd;
+  border-bottom: 2px solid #ddd;
+  >li+li:before{
+    content: "";
+    padding: 0;
+  }
+  > li{
+    font-size: 12px;
+    margin-right: 5px;
+    border-top: @borderLi solid @border-color;
+    border-bottom: @borderLi solid @border-color;
+    position: relative;
+    transition: @defTrans;
+    &:hover{
+      border-color: desaturate(@border-color, 20%)
+    }
+    &:last-child{
+      border-color: @border-color;
+    }
+    > a, > span{
+      .breadcrumbNode();
+    }
+    > a:hover{
+      color: #000;
+    }
+  }
+  li:first-child{
+    a:before{
+      background: none;
+    }
+  }
+}
+
+/*
+> a svg, span svg{
+    fill: @bgc-color;
+    stroke:white;
+    stroke-width:1;
+    transition: @defTrans;
+    position: absolute;
+    right: -20px;
+    top: 0;
+  }
+  > a:hover svg{
+    fill:@border-color;
+  }
+*/

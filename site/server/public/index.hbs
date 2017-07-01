@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" href="{{staticMap '/public/vendor/css/bootstrap.min.css'}}">
+    <link rel="stylesheet" href="{{staticMap '/public/vendor/css/bootstrap-theme.min.css'}}">
+    <link rel="stylesheet" href="{{staticMap '/public/app/css/bundle.min.css'}}">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <title>Abiturient</title>
+
+</head>
+<body>
+<div id="page"></div>
+<script>
+    var serverOptions = {
+        baseUrl: "{{baseUrl}}",
+        lastUpdated: "{{lastUpdated}}"
+    };
+</script>
+<script data-main="{{staticMap '/public/app/js/main.js'}}" src="{{staticMap '/public/vendor/js/require.js'}}"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+<td class="center">{{= statement.place}}</td><td>{{= name}}</td><td class="center">{{= statement.generalPoints}}</td><td class="center">{{= statement.attestPoints}}</td><td class="center">{{= statement.znoPoints}}</td><td class="center">{{= chance}}%</td>
