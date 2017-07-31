@@ -3,9 +3,10 @@
   "port": 3000,
   "lastUpdated": "Wed Feb 22 2017 10:01:59 GMT+0300 (Московское время (зима))",
   "yearArchives": [
-    2016
+    2016,
+    2017
   ],
-  "activeYear": 2016,
+  "activeYear": 2017,
   "mongo": {
     "mainDb": "mongodb://localhost/parser",
     "logsDb": "mongodb://localhost/logs",
@@ -25,7 +26,8 @@
           "connectTimeoutMS": 30000
         }
       }
-    }
+    },
+    "threads": 100
   },
   "mail": {
     "user": "vasilyevnikolayy@gmail.com",
@@ -34,7 +36,8 @@
   "parser": {
     "baseUrl": "http://vstup.info/",
     "interval": 86400000,
-    "siteUpdated": "31/01/17 o 23:39"
+    "siteUpdated": "31/01/17 o 23:39",
+    "threads": 100
   },
   "admin": {
     "mail": "reddok2@gmail.com"

@@ -6,7 +6,7 @@ nconf.argv().env().file({ file: path.join(__dirname, "config.json") });
 module.exports = {
 
     get: (key, cb) => {
-        /*if(!cb) return;*/
+
         nconf.load((err) => {
             if(err) return cb(err);
             cb(null, nconf.get(key));

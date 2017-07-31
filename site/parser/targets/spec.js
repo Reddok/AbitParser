@@ -47,10 +47,17 @@ module.exports = (parser, parseString) => {
         names.forEach(function(name, i) {
 
             let regexp = /\w+/, /*просто вибирати цифри зі строки*/
-                currentConcurs = concurs[i] === places[i]? 0 : +concurs[i].match(regexp)[0],
                 currentRequests = +requests[i].match(regexp)[0],
                 currentPlaces = +places[i].match(regexp)[0],
-                anchor;
+                anchor, currentConcurs ;
+
+            currentConcurs = concurs[i].match(regexp);
+
+            if( !currentConcurs || concurs[i] === places[i] ) {
+                currentConcurs = 0;
+            } else {
+                currentConcurs = +currentConcurs[0];
+            }
 
             if(currentRequests) anchor = anchors[countId++];
 

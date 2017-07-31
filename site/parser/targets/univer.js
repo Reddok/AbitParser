@@ -1,7 +1,7 @@
 module.exports = (parser, parseString) => {
 
-
     return (options, cb) => {
+
         const items = options.items;
 
         parser.push({

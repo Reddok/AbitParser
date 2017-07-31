@@ -9,16 +9,19 @@ const Router = require('koa-router'),
 
          registerRoutes: function() {
             let router = new Router();
+
              router.use(function* (next) {
-                 const year = this.query.year || yield config.get("yearArchives").pop();
+                 let year = this.query.year;
+                 if(!year) year =  yield config.get("yearArchives").pop();
+
                  this.state.Model = yield getModel('Student', +year);
                  this.state.closing = yield getStateOfYear(year);
                  yield next;
              });
-            router.get('/', this.read);
-            router.get('/:id', this.show);
-            router.get('/search', this.search);
-            return router;
+                router.get('/', this.read);
+                router.get('/:id', this.show);
+                router.get('/search', this.search);
+                return router;
          },
 
         read: function* () {

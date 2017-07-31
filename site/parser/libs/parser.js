@@ -6,9 +6,9 @@ const Crawler = require('crawler'),
     c = new Crawler();
 
 class Requests extends Emitter{
-    constructor(concurrency) {
+    constructor(concurrency = 50) {
         super();
-        this._queue = async.queue(request, concurrency || 50);
+        this._queue = async.queue(request, concurrency);
         this._queue.drain = () => this.emit("parser:end");
     }
 

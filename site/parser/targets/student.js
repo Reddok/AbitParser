@@ -4,10 +4,9 @@ module.exports = (parser, parseString) => {
     return (options) => {
         const items = options.items,
             pattern = [
+                'td:nth-child(1)',
                 'td:nth-child(2)',
-                'td:nth-child(4)',
-                'td:nth-child(5)',
-                'td:nth-child(6)'
+                'td:nth-child(3)',
             ].map(select => basePath + " " + select);
         pattern.push({selector: basePath + " " + 'td:nth-child(1)', type: "dom"});
 
@@ -18,11 +17,12 @@ module.exports = (parser, parseString) => {
 
                 if(err) return options.error || options.error(err);
 
-                const names = res.results[0],
-                    generalPoints = res.results[1],
-                    attestPoints = res.results[2],
-                    znoPoints = res.results[3],
-                    domElemsTd = res.result[4],
+                console.log(res.results);
+
+                const
+                    names = res.results[0],
+                    znoPoints = res.results[1],
+                    domElemsTd = res.result[],
                     parentId = parseString(res.parentData.url, 'p', '.html');
 
                 names.forEach(function(name, i) {

@@ -16,20 +16,20 @@ module.exports = (config, logFactory, errorHandler) => {
 
     class Parser extends Emitter {
 
-        constructor() {
+        constructor(threads) {
             super();
 
-            this._parser = new (require('./libs/parser'));
+            this._parser = new (require('./libs/parser'))(threads);
             this.isParsing = false;
 
             this._diContainer = diContainerFactory();
             this._diContainer.register("ParserError", require("./libs/error"));
             this._diContainer.register("parseString", require("./libs/string"));
             this._diContainer.register("parser", this._parser);
-            this._diContainer.factory("findRegions", require("./targets/region"));
-            this._diContainer.factory("findUnivers", require("./targets/univer"));
-            this._diContainer.factory("findSpecs", require("./targets/spec"));
-            this._diContainer.factory("findStudents", require("./targets/student"));
+            this._diContainer.factory("Region", require("./targets/region"));
+            this._diContainer.factory("Univer", require("./targets/univer"));
+            this._diContainer.factory("Spec", require("./targets/spec"));
+            this._diContainer.factory("Student", require("./targets/student"));
 
             this.on('parser:pause', this.pause.bind(this));
             this.on('parser:resume', this.resume.bind(this));
@@ -47,6 +47,8 @@ module.exports = (config, logFactory, errorHandler) => {
 
         _initializeParsing(url) {
             if(!url) throw new Error("You must provide base url");
+
+
             this._parser.push({
                 items: [url],
                 pattern: ['.title-page small', '.title-page .title-description'],
@@ -57,9 +59,12 @@ module.exports = (config, logFactory, errorHandler) => {
                         descriptionString = res.results[1][0],
                         date = extract(titleString, patterns.date);
 
+                    console.log('description', date);
+
                     this._updateYearArchives(descriptionString)
                         .then(this._isNeededParse.bind(this, date))
                         .then(flag => {
+                            console.log('before creating requrest', flag);
                             if(flag) {
                                 this._currentUpdate = date;
                                 this._parse(url);
@@ -86,10 +91,11 @@ module.exports = (config, logFactory, errorHandler) => {
 
         _parse(url) {
             this._parser.on("parser:end", this._endParsing.bind(this));
-            this._createRequest('findRegions', url, (res) => {
-                this._createRequest('findUnivers', res, (res) => {
-                    this._createRequest('findSpecs', res, (res) => {
-                        this._createRequest('findStudents', res);
+
+            this._createRequest('Region', url, (res) => {
+                this._createRequest('Univer', res, (res) => {
+                    this._createRequest('Spec', res, (res) => {
+                        this._createRequest('Student', res);
                     })
                 });
             });
@@ -102,7 +108,7 @@ module.exports = (config, logFactory, errorHandler) => {
         }
 
         _updateYearArchives(string) {
-            const year = extract(string, patterns.year);
+            const year = +extract(string, patterns.year);
 
             return config.get("yearArchives").then((archivesYears) => {
                 if (!~archivesYears.indexOf(year)) {
@@ -110,13 +116,13 @@ module.exports = (config, logFactory, errorHandler) => {
                     return config.set("yearArchives", archivesYears);
                 }
             }).then(() => {
-                if(!~string.search(patterns.archive)) return config.set("activeYear", year + 1);
+                return config.set("activeYear", year);
             });
         }
 
         _isNeededParse(date) {
-            config.get("parser:siteUpdated").then((lastUpdated) => lastUpdated).then((lastUpdated) => {
-                return date !== lastUpdated;
+            return config.get("parser:siteUpdated").then( lastUpdated => {
+                return date <= lastUpdated;
             });
         }
 

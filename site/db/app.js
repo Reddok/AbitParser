@@ -24,9 +24,9 @@ module.exports = (config, logFactory, errorHandler) => {
 
     class Db extends Emitter{
 
-        constructor() {
+        constructor(threads = 50) {
             super();
-            this.queue = async.queue(this._save.bind(this), 100);
+            this.queue = async.queue(this._save.bind(this), threads);
             this.queue.drain = ()=> this.emit("db:drain");
         }
 
@@ -38,7 +38,6 @@ module.exports = (config, logFactory, errorHandler) => {
 
                     this.connect = mongoose.connect(dbPath, options);
                     this.on('save:data', this.push.bind(this));
-                    this.on('change:state', this.changeState.bind(this));
                     return this;
                 }
             );
@@ -72,7 +71,7 @@ module.exports = (config, logFactory, errorHandler) => {
         }
 
         _queueCallback(err) {
-            if(err) return console.log(err);/*errorHandler(new DbError('Сталась помилка при збереженні ' + data.body.name + ': ' + err.message));*/
+            if(err) return console.log(err); /*errorHandler(new DbError('Сталась помилка при збереженні ' + data.body.name + ': ' + err.message));*/
             this.emit('db:saved:data');
         }
 
@@ -81,14 +80,16 @@ module.exports = (config, logFactory, errorHandler) => {
             const data = query.data,
                 model = query.model,
                 strategy = loadStrategies[query.type];
+
             let prom;
 
             if(strategy) prom = strategy(model, data);
             else prom = model.update({name: data.name}, {$set: data, $setOnInsert: {_id: Date.now()}}, {upsert: true});
 
 
-            prom.then(()=> callback(null))
-                .catch((err) => {
+            prom.then(
+                ()=> callback(null),
+                err => {
                     this.emit("save:error", err, data);
                     if(err.code === 11000) return this._save(query, callback);
                     else callback(err, data);

@@ -26,14 +26,6 @@ const mongoose = require('mongoose'),
                 type: Number,
                 required: true
             },
-            generalPoints: {
-                type: Number,
-                required: true
-            },
-            attestPoints: {
-                type: String,
-                required: true
-            },
             znoPoints: {
                 type: String,
                 required: true

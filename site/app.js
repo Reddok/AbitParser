@@ -27,15 +27,11 @@ class App extends Emitter{
 
     constructor() {
         super();
-        let Db = diContainer.get("Db"),
-            Server = diContainer.get("Server"),
-            Parser = diContainer.get("Parser");
 
-        this.db = new Db();
-        this.server = new Server();
-        this.parser = new Parser();
         this._paused = false;
         this.errors = [];
+
+        this._init();
     }
 
     start() {
@@ -84,6 +80,25 @@ class App extends Emitter{
 
     }
 
+    _init() {
+
+        let Db = diContainer.get("Db"),
+            Server = diContainer.get("Server"),
+            Parser = diContainer.get("Parser");
+
+            return Promise.all([ config.get('mongo:threads'), config.get('parser:threads') ])
+                .then( (mongoThreads, parserThreads) => {
+
+                    this.db = new Db(mongoThreads);
+                    this.server = new Server();
+                    this.parser = new Parser(parserThreads);
+
+                    this.emit('init');
+
+                });
+
+    }
+
     sendData(data) {
         this.db.emit('save:data', data);
         this._parserDown();
@@ -122,9 +137,7 @@ class App extends Emitter{
 
 }
 
-let app = new App();
-
-module.exports = app;
+module.exports = App;
 
 
 

@@ -2,6 +2,7 @@ module.exports = (parser, parseString) => {
 
     return (options, cb) => {
         const items = options.items;
+
         parser.push({
             items: Array.isArray(items)? items : [items],
             pattern: [
@@ -12,7 +13,7 @@ module.exports = (parser, parseString) => {
                 '#abet td:first-child a'
             ],
             callback: (err, res) => {
-                console.log("callback regions");
+
                 if(err) return options.error(err);
 
                 let anchors = res.results[0],

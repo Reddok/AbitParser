@@ -36,7 +36,9 @@ module.exports = function(config, mapFile, dateToString, HttpError, RegionContro
 
 
 
-        router.get('/public/*', function*() { yield serve(this, 'server/' + this.path);});
+        router.get('/public/*', function*() {
+            yield serve(this, 'server/' + this.path);
+        });
 
         app.use(router.routes()).use(router.allowedMethods());
 
